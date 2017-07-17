@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px;
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  color: #FFF;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+}
+
+/* Main app */
+.weathertron-header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 100;
+  margin-bottom: 30px;
+}
+
+.weathertron-header-text,
+.weathertron-header-zip {
+  display: inline-block;
+  font-size: 38px;
+  font-weight: 100;
+}
+
+.weathertron-header-zip {
+  width: 130px;
+  background: none;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #FFF;
+  color: #FFF;
+  text-align: center;
+}
+.weathertron-header-zip::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.weathertron-forecast {
+  text-align: center;
+}
+.weathertron-forecast-empty {
+	height: 160px;
+	line-height: 160px;
+	font-size: 48px;
+	opacity: 0.5;
+	font-weight: 100;
+}
+.weathertron-forecast-empty.is-error {
+	color: red;
+	opacity: 1;
+}
+
+
+/* Forecast blocks */
+.forecast {
+  display: inline-block;
+  width: 11.5%;
+  margin: 0.5%;
+}
+.forecast-img {
+  width: 60%;
+  height: auto;
+}
+.forecast-type {
+  font-size: 18px;
+  line-height: 18px;
+  height: 18px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.forecast-temp {
+  font-size: 16px;
+}
+.forecast-temp-hi,
+.forecast-temp-lo,
+.forecast-temp-div {
+  display: inline-block;
+}
+.forecast-temp-div {
+  padding: 0 5px;
+}

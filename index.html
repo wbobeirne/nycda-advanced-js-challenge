@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title>Weathertron</title>
+
+		<link rel="stylesheet" type="text/css" href="./style.css"/>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="./script.js"></script>
+	</head>
+	<body>
+		<div class="weathertron">
+			<div class="weathertron-header">
+				<div class="weathertron-header-text">The weather for</div>
+				<input class="weathertron-header-zip" maxlength="5" placeholder="Zipcode"/>
+			</div>
+
+			<div class="weathertron-forecast">
+				<div class="weathertron-forecast-empty">Enter a zipcode</div>
+				<!-- Forecast blocks put in here by JS -->
+			</div>
+		</div>
+
+		<script>Weathertron.init();</script>
+	</body>
+</html>
