@@ -88,20 +88,21 @@ const Weathertron = {
 		let html = "";
 		console.log(simpleForecast);
 
-		for (let i = 0; i < simpleForecast.length; i++) {
-			const fc = simpleForecast[i];
-			const iconSrc = imgUrl + fc.icon + ".png";
+		// for (let i = 0; i < simpleForecast.length; i++)
+		simpleForecast.forEach((element, idx) => {
+			const fc = simpleForecast[idx];
+			const iconSrc = imgUrl + fc.icon +  ".png";
 
-			html += '<div class="forecast">';
-			html += '  <img class="forecast-img" src="' + iconSrc + '"/>';
-			html += '  <div class="forecast-type">' + fc.weatherType + '</div>';
-			html += '  <div class="forecast-temp">';
-			html += '    <div class="forecast-temp-hi">Hi ' + fc.hiTemp + '&deg;</div>';
-			html += '    <div class="forecast-temp-div">/</div>';
-			html += '    <div class="forecast-temp-lo">Lo ' + fc.loTemp + '&deg;</div>';
-			html += '  </div>';
-			html += '</div>';
-		}
+			html += `<div class="forecast">
+			   <img class="forecast-img" src=  ${iconSrc}  />
+			   <div class="forecast-type">  ${fc.weatherType}  </div>
+			   <div class="forecast-temp">
+			     <div class="forecast-temp-hi">Hi   ${fc.hiTemp}  &deg;</div>
+			     <div class="forecast-temp-div">/</div>
+			     <div class="forecast-temp-lo">Lo  ${fc.loTemp}  &deg;</div>
+			   </div>
+			 </div>`;
+		});
 
 		// Insert the constructed HTML
 		this.dom.forecast.html(html);
@@ -112,7 +113,7 @@ const Weathertron = {
 	 * @param {string} message - The message to display
 	 * @param {string} messageType - "message" or "error", defaults to "message"
 	 */
-	renderMessage: function(message, messageType) {
+	renderMessage(message, messageType)  {
 		// Default params
 		if (!message) {
 			message = "Enter a zipcode";
@@ -122,8 +123,10 @@ const Weathertron = {
 		}
 
 		// Render the message
-		let classes = 'weathertron-forecast-empty is-' + messageType;
-		let messageEl = '<div class="' + classes + '">' + message + '</div>';
+		// let classes = 'weathertron-forecast-empty is-' + messageType;
+		let classes = `weathertron-forecast-empty is- ${messageType}`;
+		// let messageEl = '<div class="' + classes + '">' + message + '</div>';
+		let messageEl = `<div class= ${classes} > ${message} </div>`;
 		this.dom.forecast.html(messageEl);
 	},
 };
