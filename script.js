@@ -50,7 +50,7 @@ const Weathertron = {
 				data: {
 					APPID: APPID,
 					zip: zip,
-					units: "imperial",
+					units: "metric",
 				},
 				success: function(res) {
 					resolve(res.list);
@@ -74,36 +74,36 @@ const Weathertron = {
 	renderForecast: function(forecast) {
 		// The forecast we get is very complex, so let's simplify it for rendering
 		const simpleForecast = [];
-
-		for (let i = 0; i < forecast.length; i++) {
+		forecast.map((vals) => {
+			console.log(vals);
 			simpleForecast.push({
-				hiTemp: parseInt(forecast[i].temp.max, 10),
-				loTemp: parseInt(forecast[i].temp.min, 10),
-				weatherType: forecast[i].weather[0].description,
-				icon: forecast[i].weather[0].icon,
+				hiTemp: parseInt(vals.temp.max, 10),
+				loTemp: parseInt(vals.temp.min, 10),
+				weatherType: vals.weather[0].description,
+				icon: vals.weather[0].icon,
 			});
-		}
+		});
 
 		// Now we want to convert that array to a bunch of HTML to insert
 		let html = "";
 		console.log(simpleForecast);
 
-		for (let i = 0; i < simpleForecast.length; i++) {
-			const fc = simpleForecast[i];
+		simpleForecast.forEach((vals) => {
+			const fc = vals;
 			const iconSrc = imgUrl + fc.icon + ".png";
 
-			html += '<div class="forecast">';
-			html += '  <img class="forecast-img" src="' + iconSrc + '"/>';
-			html += '  <div class="forecast-type">' + fc.weatherType + '</div>';
-			html += '  <div class="forecast-temp">';
-			html += '    <div class="forecast-temp-hi">Hi ' + fc.hiTemp + '&deg;</div>';
-			html += '    <div class="forecast-temp-div">/</div>';
-			html += '    <div class="forecast-temp-lo">Lo ' + fc.loTemp + '&deg;</div>';
-			html += '  </div>';
-			html += '</div>';
-		}
+				html += `<div class="forecast">
+				  <img class="forecast-img" src="${iconSrc}"/>
+				  <div class="forecast-type">${fc.weatherType}</div>
+				  <div class="forecast-temp">
+				    <div class="forecast-temp-hi">Hi ${fc.hiTemp}&deg;</div>
+				    <div class="forecast-temp-div">/</div>
+				    <div class="forecast-temp-lo">Lo ${fc.loTemp}&deg;</div>
+				  </div>
+				</div>`
+		});
 
-		// Insert the constructed HTML
+	// Insert the constructed HTML
 		this.dom.forecast.html(html);
 	},
 
@@ -112,18 +112,10 @@ const Weathertron = {
 	 * @param {string} message - The message to display
 	 * @param {string} messageType - "message" or "error", defaults to "message"
 	 */
-	renderMessage: function(message, messageType) {
-		// Default params
-		if (!message) {
-			message = "Enter a zipcode";
-		}
-		if (!messageType) {
-			messageType = "message";
-		}
-
+	renderMessage: function(message = "Enter a zipcode", messageType = "message") {
 		// Render the message
-		let classes = 'weathertron-forecast-empty is-' + messageType;
-		let messageEl = '<div class="' + classes + '">' + message + '</div>';
+		let classes = `weathertron-forecast-empty is- ${messageType}`;
+		let messageEl = `<div class="${classes}">${message}</div>`;
 		this.dom.forecast.html(messageEl);
 	},
 };
